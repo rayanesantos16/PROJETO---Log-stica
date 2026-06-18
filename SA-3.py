@@ -98,3 +98,29 @@ def remover_produto():
             break
     if not achou:
         print("Órgão não encontrado para remoção.")
+
+while True:
+    print("\n======= SISTEMA ORGÃOS EM ESTOQUE =======")
+    print("| 1-Cadastrar Órgão \n| 2-Listar Estoque \n| 3-Buscar por ID \n| 4-Atualizar Quantidade ")
+    print("| 5-Valor Total     \n| 6-Nível Baixo de Estoque \n| 7-Retirar Item \n| 8-Sair")
+    op = input("Escolha a operação: ")
+    
+    if op == "1":
+        adicionar_produto()
+    elif op == "2":
+        listar_produtos()
+    elif op == "3":
+        buscar_produto()
+    elif op == "4":
+        atualizar_estoque()
+    elif op == "5":
+        calcular_valor_inventario()
+    elif op == "6":
+        verificar_estoque_minimo()
+    elif op == "7":
+        remover_produto()
+    elif op == "8":
+        print("Encerrando sistema...")
+        break
+    else:
+        print("Opção inválida do menu.")
