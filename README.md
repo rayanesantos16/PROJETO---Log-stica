@@ -28,7 +28,7 @@ Siga os passos abaixo para rodar o sistema localmente:
 
 1. Clone o repositório para a sua máquina:
    ```bash
-   git clonE https://github.com/rayanesantos16/PROJETO---Log-stica.git
+   git clone https://github.com/rayanesantos16/PROJETO---Log-stica.git
    ```
 
 2. Acesse a pasta do projeto:
@@ -40,6 +40,4 @@ Siga os passos abaixo para rodar o sistema localmente:
    ```bash
    python SCES.py
    ```
-   *(Substitua `SCES.py` pelo nome real do seu arquivo de código)*
-
 > 💡 **Nota:** O arquivo `estoque.txt` será criado de forma 100% automática na mesma pasta logo após a primeira inserção ou alteração de dados.
