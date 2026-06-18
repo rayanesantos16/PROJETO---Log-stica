@@ -75,3 +75,26 @@ def calcular_valor_inventario():
         total = total + valor_item
         print(f"{p[1]}: R$ {valor_item:.2f}")
     print(f"VALOR TOTAL DO MERCADO: R$ {total:.2f}")
+
+def verificar_estoque_minimo():
+    print("\n===== ALERTA DE ESTOQUE MÍNIMO =====")
+    alerta = False
+    for p in estoque:
+        if p[2] < 5:
+            print(f"⚠️ Alerta: {p[1]} em nível crítico! Apenas {p[2]} unidades no {p[3]}.")
+            alerta = True
+    if not alerta:
+        print("Todos os órgãos estão com níveis seguros de armazenamento.")
+
+def remover_produto():
+    print("\n===== EXCLUSÃO DEFINITIVA DE REGISTRO =====")
+    id_remover = int(input("Digite o ID do órgão a ser descartado: "))
+    achou = False
+    for i in range(len(estoque)):
+        if estoque[i][0] == id_remover:
+            orgao_removido = estoque.pop(i)
+            print(f"Registro '{orgao_removido[1]}' removido definitivamente da matriz.")
+            achou = True
+            break
+    if not achou:
+        print("Órgão não encontrado para remoção.")
