@@ -1,0 +1,5 @@
+1;Coração Humano;9;Câmara Fria A;650000.0
+2;Rim Humano;8;Câmara Fria B;27000.0
+3;Útero Humano;1;Maleta Térmica 01;500000.0
+4;Fígado Humano;6;Câmara Fria C;680000.0
+5;Pulmão Humano;4;Câmara Fria D;640000.0
