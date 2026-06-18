@@ -40,4 +40,38 @@ def buscar_produto():
     if not achou:
         print("Órgão não encontrado no sistema.")
 
+def atualizar_estoque():
+    print("\n--- ATUALIZAR QUANTIDADE DE ÓRGÃOS =====")
+    id_busca = int(input("Digite o ID do órgão: "))
+    achou = False
+    for i in range(len(estoque)):
+        if estoque[i][0] == id_busca:
+            achou = True
+            print(f"Item: {estoque[i][1]} | Quantidade Atual: {estoque[i][2]}")
+            print("1 - Entrada (+)\n2 - Saída (-)")
+            opcao = input("Opção: ")
+            qtd_alterar = int(input("Quantidade a alterar: "))
+            
+            if opcao == "1":
+                estoque[i][2] = estoque[i][2] + qtd_alterar
+                print("Quantidade atualizada com sucesso.")
+            elif opcao == "2":
+                if estoque[i][2] >= qtd_alterar:
+                    estoque[i][2] = estoque[i][2] - qtd_alterar
+                    print("Retirada realizada com sucesso.")
+                else:
+                    print("Erro: Estoque insuficiente para essa retirada.")
+            else:
+                print("Opção inválida.")
+            break
+    if not achou:
+        print("Órgão não encontrado.")
 
+def calcular_valor_inventario():
+    print("\n===== BALANÇO FINANCEIRO DO ESTOQUE =====")
+    total = 0.0
+    for p in estoque:
+        valor_item = p[2] * p[4]
+        total = total + valor_item
+        print(f"{p[1]}: R$ {valor_item:.2f}")
+    print(f"VALOR TOTAL DO MERCADO: R$ {total:.2f}")
