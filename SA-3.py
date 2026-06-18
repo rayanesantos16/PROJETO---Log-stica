@@ -1,3 +1,5 @@
+import os
+
 estoque = [
     [1, "Coração Humano", 3, "Câmara Fria A", 650000.00],
     [2, "Rim Humano", 8, "Câmara Fria B",27000.00 ],
@@ -7,6 +9,31 @@ estoque = [
 ]
 
 proximo_id = 6
+
+def salvar_estoque():
+    """Salva todo o conteúdo da matriz estoque no arquivo txt."""
+    with open("estoque.txt", "w", encoding="utf-8") as arquivo:
+        for p in estoque:
+            arquivo.write(f"{p[0]};{p[1]};{p[2]};{p[3]};{p[4]}\n")
+
+def carregar_estoque():
+    """Carrega os dados do arquivo se ele existir e atualiza o proximo_id."""
+    global proximo_id
+    if os.path.exists("estoque.txt"):
+        estoque.clear() 
+        with open("estoque.txt", "r", encoding="utf-8") as arquivo:
+            for linha in arquivo:
+                if linha.strip():
+                    dados = linha.strip().split(";")
+                    id_prod = int(dados[0])
+                    nome = dados[1]
+                    qtd = int(dados[2])
+                    local = dados[3]
+                    preco = float(dados[4])
+                    estoque.append([id_prod, nome, qtd, local, preco])
+        
+        if estoque:
+            proximo_id = max(p[0] for p in estoque) + 1
 
 def adicionar_produto():
     global proximo_id
@@ -19,6 +46,7 @@ def adicionar_produto():
     estoque.append([proximo_id, nome, quantidade, localizacao, preco])
     print(f"Cadastrado com sucesso! ID gerado automaticamente: {proximo_id}")
     proximo_id +=1
+    salvar_estoque()
 
 def listar_produtos():
     print("\n===== INVENTÁRIO DE ÓRGÃOS =====")
@@ -55,10 +83,12 @@ def atualizar_estoque():
             if opcao == "1":
                 estoque[i][2] = estoque[i][2] + qtd_alterar
                 print("Quantidade atualizada com sucesso.")
+                salvar_estoque()
             elif opcao == "2":
                 if estoque[i][2] >= qtd_alterar:
                     estoque[i][2] = estoque[i][2] - qtd_alterar
                     print("Retirada realizada com sucesso.")
+                    salvar_estoque()
                 else:
                     print("Erro: Estoque insuficiente para essa retirada.")
             else:
@@ -81,7 +111,7 @@ def verificar_estoque_minimo():
     alerta = False
     for p in estoque:
         if p[2] < 5:
-            print(f"⚠️ Alerta: {p[1]} em nível crítico! Apenas {p[2]} unidades no {p[3]}.")
+            print(f"⚠️ Alerta ⚠️: {p[1]} em nível crítico! Apenas {p[2]} unidades no {p[3]}.")
             alerta = True
     if not alerta:
         print("Todos os órgãos estão com níveis seguros de armazenamento.")
@@ -95,31 +125,34 @@ def remover_produto():
             orgao_removido = estoque.pop(i)
             print(f"Registro '{orgao_removido[1]}' removido definitivamente da matriz.")
             achou = True
+            salvar_estoque()
             break
     if not achou:
         print("Órgão não encontrado para remoção.")
+
+carregar_estoque()
 
 while True:
     print("\n======= SISTEMA ORGÃOS EM ESTOQUE =======")
     print("| 1-Cadastrar Órgão \n| 2-Listar Estoque \n| 3-Buscar por ID \n| 4-Atualizar Quantidade ")
     print("| 5-Valor Total     \n| 6-Nível Baixo de Estoque \n| 7-Retirar Item \n| 8-Sair")
-    op = input("Escolha a operação: ")
+    opcao = input("Escolha a operação: ")
     
-    if op == "1":
+    if opcao == "1":
         adicionar_produto()
-    elif op == "2":
+    elif opcao == "2":
         listar_produtos()
-    elif op == "3":
+    elif opcao == "3":
         buscar_produto()
-    elif op == "4":
+    elif opcao == "4":
         atualizar_estoque()
-    elif op == "5":
+    elif opcao == "5":
         calcular_valor_inventario()
-    elif op == "6":
+    elif opcao == "6":
         verificar_estoque_minimo()
-    elif op == "7":
+    elif opcao == "7":
         remover_produto()
-    elif op == "8":
+    elif opcao == "8":
         print("Encerrando sistema...")
         break
     else:
