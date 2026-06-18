@@ -19,3 +19,11 @@ def adicionar_produto():
     estoque.append([proximo_id, nome, quantidade, localizacao, preco])
     print(f"Cadastrado com sucesso! ID gerado automaticamente: {proximo_id}")
     proximo_id +=1
+
+def listar_produtos():
+    print("\n===== INVENTÁRIO DE ÓRGÃOS =====")
+    if len(estoque) == 0:
+        print("Estoque vazio.")
+    else:
+        for p in estoque:
+            print(f"ID: {p[0]} | Item: {p[1]} | Qtd: {p[2]} | Local: {p[3]} | Preço: R$ {p[4]:.2f}")
