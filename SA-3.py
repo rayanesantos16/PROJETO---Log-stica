@@ -27,3 +27,17 @@ def listar_produtos():
     else:
         for p in estoque:
             print(f"ID: {p[0]} | Item: {p[1]} | Qtd: {p[2]} | Local: {p[3]} | Preço: R$ {p[4]:.2f}")
+
+def buscar_produto():
+    print("\n===== BUSCAR ÓRGÃO POR ID =====")
+    id_busca = int(input("Digite o ID do órgão: "))
+    achou = False
+    for p in estoque:
+        if p[0] == id_busca:
+            print(f"ID: {p[0]} | Item: {p[1]} | Qtd: {p[2]} | Local: {p[3]} | Preço: R$ {p[4]:.2f}")
+            achou = True
+            break
+    if not achou:
+        print("Órgão não encontrado no sistema.")
+
+
