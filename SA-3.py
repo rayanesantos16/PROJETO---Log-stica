@@ -7,3 +7,15 @@ estoque = [
 ]
 
 proximo_id = 6
+
+def adicionar_produto():
+    global proximo_id
+    print("\n====== CADASTRAR NOVO ÓRGÃO ========")
+    nome = input("Nome do Órgão/Item: ")
+    quantidade = int(input("Quantidade em Estoque: "))
+    localizacao = input("Câmara de Armazenamento: ")
+    preco = float(input("Preço (R$): "))
+    
+    estoque.append([proximo_id, nome, quantidade, localizacao, preco])
+    print(f"Cadastrado com sucesso! ID gerado automaticamente: {proximo_id}")
+    proximo_id +=1
